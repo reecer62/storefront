@@ -2,3 +2,17 @@ extends layout
 
 block content
     p Your email is: #{email}
+
+    //- Table form
+    form(method='POST')
+        h1 Join Table
+        label(for='table_id') Table ID:
+        input#table_id(type='text', name='table_id')
+        label(for='table_password') Table Password:
+        input#table_password(type='password' name='table_password')
+        h1 Create Table
+        label(for='create_id') Table ID:
+        input#create_id(type='text', name='create_id')
+        label(for='create_password') Table Password:
+        input#create_password(type='password' name='create_password')
+        button(type='submit') SUBMIT
