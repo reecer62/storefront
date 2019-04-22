@@ -10,6 +10,7 @@ const mongoose = require("./config/db")
 // Routers
 const indexRouter = require("./routes/index")
 const profileRouter = require("./routes/profile")
+const logoutRouter = require("./routes/logout")
 
 const app = express()
 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")))
 // Set routes
 app.use("/", indexRouter)
 app.use("/profile", profileRouter)
+app.use("/logout", logoutRouter)
 
 const port = 3000
 
