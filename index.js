@@ -3,6 +3,9 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const path = require("path")
 
+// Connect to db
+require("./config/db")
+
 // Routers
 const indexRouter = require("./routes/index")
 
