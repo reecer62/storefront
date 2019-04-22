@@ -9,6 +9,7 @@ const mongoose = require("./config/db")
 
 // Routers
 const indexRouter = require("./routes/index")
+const profileRouter = require("./routes/profile")
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")))
 
 // Set routes
 app.use("/", indexRouter)
+app.use("/profile", profileRouter)
 
 const port = 3000
 
