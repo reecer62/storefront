@@ -3,3 +3,15 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  h1 Sign Up
+
+  //- Register Form
+  form(method='POST')
+    label(for='email') Email:
+    input#email(type='email', placeholder='name@email.com' name='email')
+    label(for='password') Password:
+    input#password(type='password' name='password')
+    label(for='password-confirm') Confirm Password:
+    input#password-confirm(type='password' name='confirmPassword')
+    button(type='submit') Sign up
