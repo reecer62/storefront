@@ -3,6 +3,7 @@ const bodyParser = require("body-parser")
 const path = require("path")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
+var helmet = require("helmet")
 
 // Connect to db
 const mongoose = require("./config/db")
@@ -33,6 +34,7 @@ app.use(
 // Middleware
 app.use(bodyParser.json()) // Extract data from request body
 app.use(bodyParser.urlencoded({ extended: false })) // Extract data from url
+app.use(helmet()) // Prevent well known http header vulnerabilities
 
 // Set public folder
 app.use(express.static(path.join(__dirname, "public")))
