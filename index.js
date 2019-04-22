@@ -1,9 +1,11 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path")
+var session = require("express-session")
+var MongoStore = require("connect-mongo")(session)
 
 // Connect to db
-require("./config/db")
+const mongoose = require("./config/db")
 
 // Routers
 const indexRouter = require("./routes/index")
@@ -13,6 +15,18 @@ const app = express()
 // View engine
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "pug")
+
+// Session tracks logins
+app.use(
+  session({
+    secret: "Definitely a secret.",
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+)
 
 // Middleware
 app.use(bodyParser.json()) // Extract data from request body
