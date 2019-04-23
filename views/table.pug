@@ -6,6 +6,6 @@ block content
     p Connected to table: #{table_id}
     ul#messages
     form#message-form(action="")
-        input#message(type='text', name='message')
+        textarea#message(name="message", cols="30", rows="10")
         button(type='submit') SUBMIT
         ul#typing

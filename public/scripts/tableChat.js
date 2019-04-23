@@ -30,7 +30,7 @@ message.addEventListener("input", e => {
   }
   setTimeout(() => {
     isTyping = false
-  }, 400)
+  }, 800)
 })
 
 socket.on("message", msg => {
