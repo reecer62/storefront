@@ -1,19 +1,19 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path")
-var session = require("express-session")
-var MongoStore = require("connect-mongo")(session)
-var helmet = require("helmet")
+const session = require("express-session")
+const MongoStore = require("connect-mongo")(session)
+const helmet = require("helmet")
 const dotenv = require("dotenv")
 
 // Load environment variables
 const result = dotenv.config()
-
 if (result.error) {
   throw result.error
 }
-
 console.log(result.parsed)
+
+const port = process.env.PORT || 3000
 
 // Connect to db
 const mongoose = require("./config/db")
@@ -59,7 +59,6 @@ app.use("/table", tableRouter)
 // Start server
 const http = require("http").Server(app)
 const io = require("socket.io")(http)
-const port = 3000
 http.listen(port, () => console.log(`Server started on port ${port}`))
 
 // Socket connection
