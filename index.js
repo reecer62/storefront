@@ -56,7 +56,41 @@ app.use("/profile", profileRouter)
 app.use("/logout", logoutRouter)
 app.use("/table", tableRouter)
 
-const port = 3000
-
 // Start server
-app.listen(port, () => console.log(`Server started on port ${port}`))
+const http = require("http").Server(app)
+const io = require("socket.io")(http)
+const port = 3000
+http.listen(port, () => console.log(`Server started on port ${port}`))
+
+// Socket connection
+io.on("connection", client => {
+  // Client has connected
+  io.emit("message", client.id + " joined")
+
+  // Relay message
+  client.on("message", msg => {
+    io.emit("message", msg)
+  })
+
+  // Client typing
+  client.on("typing", () => {
+    io.emit("typing", client.id)
+  })
+
+  // Client stop typing
+  client.on("stop typing", () => {
+    io.emit("stop typing", client.id)
+  })
+
+  // Client disconnects
+  client.on("disconnect", () => {
+    console.log("client disconnect...", client.id)
+    io.emit("message", client.id + " left")
+  })
+
+  // Error handling
+  client.on("error", err => {
+    console.log("received error from client: ", client.id)
+    console.log(err)
+  })
+})
