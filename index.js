@@ -4,6 +4,16 @@ const path = require("path")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
 var helmet = require("helmet")
+const dotenv = require("dotenv")
+
+// Load environment variables
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
 
 // Connect to db
 const mongoose = require("./config/db")
@@ -23,7 +33,7 @@ app.set("view engine", "pug")
 // Session tracks logins
 app.use(
   session({
-    secret: "Definitely a secret.",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: false,
     store: new MongoStore({
