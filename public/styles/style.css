@@ -1,1 +1,11 @@
 /* Main styles */
+body {
+  background: #4b4b4b;
+  color: #d4d4d4;
+}
+
+input,
+select,
+textarea {
+  color: #000000;
+}

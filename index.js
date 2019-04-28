@@ -5,6 +5,7 @@ const session = require("express-session")
 const MongoStore = require("connect-mongo")(session)
 const helmet = require("helmet")
 const dotenv = require("dotenv")
+const mongoose = require("mongoose")
 
 // Load environment variables
 const result = dotenv.config()
@@ -16,7 +17,10 @@ console.log(result.parsed)
 const port = process.env.PORT || 3000
 
 // Connect to db
-const mongoose = require("./config/db")
+mongoose
+  .connect(process.env.PROD_MONGODB, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB connected!"))
+  .catch(err => console.log(err))
 
 // Routers
 const indexRouter = require("./routes/index")

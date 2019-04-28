@@ -32,9 +32,7 @@ router.post("/", function(req, res, next) {
       if (error) {
         return next(error)
       } else {
-        return res.redirect(
-          `http://localhost:3000/table/?table_id=${req.body.create_id}`
-        )
+        return res.redirect(`/table/?table_id=${req.body.create_id}`)
       }
     })
   } else if (req.body.table_id && req.body.table_password) {
@@ -47,9 +45,7 @@ router.post("/", function(req, res, next) {
         err.status = 401
         return next(err)
       } else {
-        return res.redirect(
-          `http://localhost:3000/table/?table_id=${req.body.create_id}`
-        )
+        return res.redirect(`/table/?table_id=${req.body.create_id}`)
       }
     })
   } else {

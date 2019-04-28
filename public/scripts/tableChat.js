@@ -30,7 +30,7 @@ message.addEventListener("input", e => {
   }
   setTimeout(() => {
     isTyping = false
-  }, 800)
+  }, 100)
 })
 
 socket.on("message", msg => {
@@ -40,15 +40,14 @@ socket.on("message", msg => {
   messages.appendChild(node)
 })
 
-var canAppendTypingEl = true
 socket.on("typing", clientID => {
-  if (canAppendTypingEl) {
+  let isTypingEl = document.getElementById(clientID)
+  if (!isTypingEl) {
     let node = document.createElement("li")
     node.setAttribute("id", clientID)
     let text = document.createTextNode(clientID + " is typing...")
     node.appendChild(text)
     typingList.appendChild(node)
-    canAppendTypingEl = false
   }
 })
 
@@ -56,6 +55,5 @@ socket.on("stop typing", clientID => {
   let isTypingEl = document.getElementById(clientID)
   if (isTypingEl) {
     isTypingEl.parentNode.removeChild(isTypingEl)
-    canAppendTypingEl = true
   }
 })
